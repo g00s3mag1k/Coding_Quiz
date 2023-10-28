@@ -3,20 +3,39 @@
 <head>
     <meta charset = "UTF-8">
     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-    <meta http-equiv = "X-UA-Compatible" content = "IE=edge">
+    <meta http-equiv = "X-UA-Compatible" content = "IE=edge"/>
     <title>Coding Quiz Challenge</title>
     <link rel = "stylesheet" href = "./assets/style.css">
 </head>
 
 <body>
-    <main class = "main">
-        <header class = "header">
-            <nav class = "navbar">
-                <a href = "#" class = "score-board">View HighScores</a>
-            </nav>
-                <p class = "timer">Timer:</p>
-        </header>
-    </main>
+    <header class = "header">
+      <a href = "#" class = "score-board">View HighScores</a>
+        <p class = "timer">Timer: <span id = "time">0</span></p>
+    </header>
     
+    <section class = "box">
+      <div class = "start">
+        <h1>Coding Quiz Challenge</h1>
+        <p>Answer the following code-related questions within the time limit. 
+           Keep in mind that incorrect answers will penalize your time and score by 10 seconds!
+           Good Luck!!</p>
+      <button>Start Quiz</button>
+      </div>
+
+      <div class = "hidden" id = "questions">
+
+      </div>
+
+      <div class = "hidden">
+        <h2>Finished!</h2>
+        <p>Your final score is <span id = "final-score"></span>.</p>
+        <p>Go ahead and Enter Initials: <input type = "text" id = "initials"/>
+        <button id = "submit">Submit!</button></p>
+      </div>
+
+      <script src = "./assets/script.js"></script>
+
+    </section>
 </body>
 </html>
