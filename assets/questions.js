@@ -5,7 +5,7 @@ var questions = [ {
     }, {
       question: "The condition in an if/else statement is enclosed with ____.",
       choices: ["quotes", "square brackets", "parentheses", "curly brackets"],
-      answer: "quotes"
+      answer: "parentheses"
     }, {
       question: "Arrays in JavaScript can be used to store ____.",
       choices: ["numbers", "booleans", "strings", "all of the above"],

@@ -15,7 +15,7 @@ function startQuiz() {
     
     startScreen.setAttribute("class", "start hide");
     
-    questionEl.setAttribute("class", "");
+    questionEl.setAttribute("class", " ");
     
     timerId = setInterval(function() {
      clockTick();
@@ -28,14 +28,14 @@ function startQuiz() {
 
 function getQuestion() {
     var activeQuestion = questions[questionIndex];
-    
-    questionEl.children[0].textContent = activeQuestion.title;
+    console.log(questions, questionIndex)
+    questionEl.children[0].textContent = activeQuestion.question;
 
     while (choicesEl.hasChildNodes()) {
         choicesEl.removeChild(choicesEl.lastChild);
     }
     for(var i = 0; i < activeQuestion.choices.length; i++) {
-        var choiceButton = $("<button>");
+        var choiceButton = document.createElement("button");
         
         choiceButton.textContent = activeQuestion.choices[i];
         
@@ -124,13 +124,13 @@ function saveHighscore() {
 }
 }
 
-function checkEnter(event) {
+function checkForEnter(event) {
     if(event.keycode === 13)
     saveHighscore();
 }
 
-buttonSubmit.onClick = saveHighscore;
+buttonSubmit.onclick = saveHighscore;
 
-buttonStart.onClick = startQuiz;
+buttonStart.onclick = startQuiz;
 
-initialEl.onKeyUp = checkEnter;
+initialEl.onkeyUp = checkForEnter;
