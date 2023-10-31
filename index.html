@@ -15,27 +15,29 @@
     </header>
     
     <section class = "box">
-      <div class = "start">
+      <div class = "start" id = "start-screen">
         <h1>Coding Quiz Challenge</h1>
         <p>Answer the following code-related questions within the time limit. 
            Keep in mind that incorrect answers will penalize your time and score by 10 seconds!
            Good Luck!!</p>
-      <button>Start Quiz</button>
+      <button id = "start">Start Quiz</button>
       </div>
 
       <div class = "hidden" id = "questions">
-
+        <h2 id="question-title"></h2>
+        <div class = "choices" id = "choices"></div>
       </div>
 
-      <div class = "hidden">
+      <div class = "hidden" id = "end-screen">
         <h2>Finished!</h2>
         <p>Your final score is <span id = "final-score"></span>.</p>
-        <p>Go ahead and Enter Initials: <input type = "text" id = "initials"/>
+        <p>Go ahead and Enter Initials: <input type = "text" id = "initials" max= "3" />
         <button id = "submit">Submit!</button></p>
       </div>
 
-      <script src = "./assets/script.js"></script>
+      <div class = "feedback hide" id = "feedback"></div>
 
+      <script src = "./assets/script.js"></script>
     </section>
 </body>
 </html>
