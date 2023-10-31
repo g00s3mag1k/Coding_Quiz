@@ -9,13 +9,11 @@
 </head>
 
 <body>
-    <header class = "header">
-      <a href = "#" class = "score-board">View HighScores</a>
-        <p class = "timer">Timer: <span id = "time">0</span></p>
-    </header>
+    <div class = "scores"><a href = "highscores.html">View HighScores</a></div>
+        <div class = "timer">Timer: <span id = "time">0</span></div>
     
-    <section class = "box">
-      <div class = "start" id = "start-screen">
+    <div class = "wrapper">
+      <div id = "start-screen" class = "start">
         <h1>Coding Quiz Challenge</h1>
         <p>Answer the following code-related questions within the time limit. 
            Keep in mind that incorrect answers will penalize your time and score by 10 seconds!
@@ -23,21 +21,25 @@
       <button id = "start">Start Quiz</button>
       </div>
 
-      <div class = "hidden" id = "questions">
+      <div id = "questions" class = "hide">
         <h2 id="question-title"></h2>
-        <div class = "choices" id = "choices"></div>
+        <div id = "choices" class = "choices"></div>
       </div>
 
-      <div class = "hidden" id = "end-screen">
+      <div id = "end-screen" class = "hide">
         <h2>Finished!</h2>
         <p>Your final score is <span id = "final-score"></span>.</p>
-        <p>Go ahead and Enter Initials: <input type = "text" id = "initials" max= "3" />
+        <p>Go ahead and Enter Initials: <input type = "text" id = "initials" max = "3" />
         <button id = "submit">Submit!</button></p>
       </div>
 
-      <div class = "feedback hide" id = "feedback"></div>
+      <div id = "feedback" class = "feedback hide"></div>
 
+    </div>
+      
+      <script src = "./assets/questions.js"></script>
       <script src = "./assets/script.js"></script>
-    </section>
+    
+    
 </body>
 </html>

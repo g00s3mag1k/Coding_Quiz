@@ -1,76 +1,57 @@
-var timeId;
 var questionIndex = 0;
 var time = questions.length * 15; 
+var timerId;
 
-var buttonStart = $("#start"); //start button
-var timeEl = $("#time");
-var questionEl = $("#questions"); //questions
-var userInput = $("#choices"); 
-var initialEl = $("#initials"); //user initials
-var buttonSubmit = $("#submit");
-var feedbackEl = $("#feedback");
-
-var questions = [
-    { question: "In HTML, an ordered list is created using which tag?",
-      choices: ["<ul>", "<al>", "<ol>", "<nl>"],
-      answer: "<ol>"
-    }, {
-      question: "Commonly used data types DO NOT include:",
-      choices: ["numbers", "strings", "booleans", "alerts"],
-      answer: "alerts"
-    }, {
-      question: "The condition in an if/else statement is enclosed with ____.",
-      choices: ["quotes", "square brackets", "parentheses", "curly brackets"],
-      answer: "quotes"
-    }, {
-      question: "Arrays in JavaScript can be used to store ____.",
-      choices: ["numbers", "booleans", "strings", "all of the above"],
-      answer: "all of the above"
-    }, {
-      question: "String values must be enclosed within ____ when being assigned to variables.",
-      choices: ["parenthesis", "quotes", "commas", "curly brackets"],
-      answer: "quotes"
-    }, {
-      question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-      choices: ["console.log", "bash/terminal", "for loops", "if statements"],
-      answer: "console.log"
-    }
-];
+var questionEl = document.getElementById("question"); 
+var timerEl = document.getElementById("time");
+var choicesEl = document.getElementById("choices"); 
+var buttonSubmit = document.getElementById("submit");
+var buttonStart = document.getElementById("start");
+var initialEl = document.getElementById("initials"); 
+var feedbackEl = document.getElementById("feedback");
 
 function startQuiz() {
-    var startScreen = document.getElementById("start");
-    startScreen.setAttribute("class", "start hidden");
-    questionEl.setAttribute("class", " ");
-    timeId = setInterval(function() {
+    var startScreen = document.getElementById("start-screen");
+    
+    startScreen.setAttribute("class", "start hide");
+    
+    questionEl.setAttribute("class", "");
+    
+    timerId = setInterval(function() {
      clockTick();
     } , 1000);
-    timeEl.textContent = time;
+    
+    timerEl.textContent = time;
+    
     getQuestion();
 }
 
 function getQuestion() {
     var activeQuestion = questions[questionIndex];
+    
     questionEl.children[0].textContent = activeQuestion.title;
 
-    while (userInput.hasChildNodes()) {
-        userInput.removeChild(userInput.lastChild);
+    while (choicesEl.hasChildNodes()) {
+        choicesEl.removeChild(choicesEl.lastChild);
     }
     for(var i = 0; i < activeQuestion.choices.length; i++) {
-        var choiceButton = document.createElement("button");
+        var choiceButton = $("<button>");
+        
         choiceButton.textContent = activeQuestion.choices[i];
-        userInput.appendChild(choiceButton);
+        
+        choicesEl.appendChild(choiceButton);
     }
-    userInput.children[0].addEventListener("click", function(event){
-        questionClick(userInput.children[0]);
+    choicesEl.children[0].addEventListener("click", function(event){
+        questionClick(choicesEl.children[0]);
     });
-    userInput.children[1].addEventListener("click", function(event){
-        questionClick(userInput.children[1]);
+    choicesEl.children[1].addEventListener("click", function(event){
+        questionClick(choicesEl.children[1]);
     });
-    userInput.children[2].addEventListener("click", function(event){
-        questionClick(userInput.children[2]);
+    choicesEl.children[2].addEventListener("click", function(event){
+        questionClick(choicesEl.children[2]);
     });
-    userInput.children[3].addEventListener("click", function(event){
-        questionClick(userInput.children[3]);
+    choicesEl.children[3].addEventListener("click", function(event){
+        questionClick(choicesEl.children[3]);
     });
 
 }
@@ -82,12 +63,14 @@ function questionClick(answerChoice) {
     } else {
         feedbackEl.textContent = "Correct!";
     }
+    
     feedbackEl.setAttribute("class", "feedback");
+
     setInterval(function() {
         feedbackEl.setAttribute("class", "feedback hide");
     }, 500);
 
-    questionIndex ++;
+    questionIndex++;
 
 if(questionIndex === questions.length)
     quizEnd();
@@ -96,11 +79,11 @@ else
 }
 
 function quizEnd() {
-    clearInterval(timeId);
-    timeEl.textContent = time;
+    clearInterval(timerId);
+    timerEl.textContent = time;
 
     var endScreenEl = document.getElementById("end-screen");
-    endScreenEl.setAttribute("class", " ");
+    endScreenEl.setAttribute("class", "");
 
     var finalScoreEl = document.getElementById("final-score");
     finalScoreEl.textContent = time;
@@ -110,33 +93,37 @@ function quizEnd() {
 
 function clockTick() {
     time--;
-    timeEl.textContent = time;
-    if (time<=0)
+    timerEl.textContent = time;
+    if (time <= 0)
     quizEnd();
 }
 
 function saveHighscore() {
     var initials = initialEl.value.toUpperCase();
-    if(initials === " ") {
+    if(initials === "") {
         alert("Input must not be blank.");
         return;
     } else if(initials.length > 3) {
         alert("Input must be no more than 3 letters.");
         return;
     } else {
-        var highScores;
-        if(JSON.parse(localStorage.getItem("highscore")) != null)
-          highScores = JSON.parse(window.localStorage.getItem("highscore"));
-      else highScores = [];
-        var newScore = {
+        var highscores;
+        
+        if(JSON.parse(localStorage.getItem("highscores")) != null)
+          highscores = JSON.parse(window.localStorage.getItem("highscores"));
+      
+          else highscores = [];
+        
+          var newScore = {
             initials: initials,
-            score: time
-    };
-    highScores.push(newScore);
+            score: time 
+        };
+    highscores.push(newScore);
     localStorage.setItem("highscores", JSON.stringify(highscores));
-    location.href = "blank.html";
+    location.href = "highscores.html";
 }
 }
+
 function checkEnter(event) {
     if(event.keycode === 13)
     saveHighscore();
