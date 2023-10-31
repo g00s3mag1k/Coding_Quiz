@@ -123,5 +123,27 @@ function saveHighscore() {
     } else if(initials.length > 3) {
         alert("Input must be no more than 3 letters.");
         return;
-    }
+    } else {
+        var highScores;
+        if(JSON.parse(localStorage.getItem("highscore")) != null)
+          highScores = JSON.parse(window.localStorage.getItem("highscore"));
+      else highScores = [];
+        var newScore = {
+            initials: initials,
+            score: time
+    };
+    highScores.push(newScore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+    location.href = "blank.html";
 }
+}
+function checkEnter(event) {
+    if(event.keycode === 13)
+    saveHighscore();
+}
+
+buttonSubmit.onClick = saveHighscore;
+
+buttonStart.onClick = startQuiz;
+
+initialEl.onKeyUp = checkEnter;
